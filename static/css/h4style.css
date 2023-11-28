@@ -1,0 +1,114 @@
+/*
+Oliver Calandra CS 416-02 | Homework 4
+Color pallet:
+#360319 - dark T purple
+#5C0029 - Tyrian Purple
+#61304B - Violet (JTC)
+#847C8D - Taupe gray
+#94BFBE - Tiffany Blue
+*/
+body {
+    background: rgba(54, 3, 25, 0.5);
+    font-family: Verdana;
+    margin: 0%;
+    padding: 0%;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.see-txt-bg {
+    color: white;
+    padding: 3%;
+    font-size: larger;
+}
+
+.padmar {
+    margin: 2%;
+    text-align: center;
+}
+
+#results-search {
+    background: #61304B;
+    color: white;
+    text-align: center;
+    display: none;
+}
+
+.padding-margin {
+    padding: 2%;
+    margin: 5%;
+}
+
+.padding {
+    padding: 2%;
+}
+
+.margin {
+    margin: 2%;
+}
+
+a {
+    color: #61304B;
+}
+
+#logo {
+    width: 250px;
+    display: block;
+    margin: auto;
+}
+
+.style-card {
+    background: rgba(148, 191, 190, 0.6);
+}
+
+.image-style {
+    width: 100%;
+    display: block;
+    margin: auto;
+}
+
+#heading {
+    background: rgb(92, 0, 41);
+    background: linear-gradient(45deg, rgba(92, 0, 41, 1) 3%, rgba(97, 48, 75, 1) 26%, rgba(133, 124, 141, 1) 71%, rgba(148, 191, 190, 1) 100%);
+    color: white;
+    padding: 3%;
+}
+
+/*https://www.30secondsofcode.org/css/s/footer-at-the-bottom/#:~:text=You%20can%20use%20flexbox%20to,and%20flex%2Ddirection%3A%20column%20.*/
+#footer {
+    padding: 3%;
+    background: #94BFBE;
+    text-align: center;
+    width: 100%;
+    margin-top: auto;
+}
+
+#searchbar {
+
+}
+
+#search {
+    background: rgba(54, 3, 25, 0.5);
+    color: white;
+}
+
+#search-more {
+    background: rgba(54, 3, 25, 0.5);
+    color: white;
+    display: none;
+}
+
+#pick-me {
+    color: darkslategrey;
+}
+
+#search-menu {
+
+}
+
+#numRes {
+    color: #94BFBE;
+    text-align: left;
+}
