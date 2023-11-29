@@ -7,7 +7,7 @@ from django.contrib import messages
 
 def view_home(request):
     response = requests.get(
-        'https://app.ticketmaster.com/discovery/v2/events.json&sort=date,asc/tIrapX2vWcsnEvoKHUkI25bDu0lTcYVT')
+        'https://app.ticketmaster.com/discovery/v2/events.json?sort=date,asc&tIrapX2vWcsnEvoKHUkI25bDu0lTcYVT')
     print(response.json())
 
     return render(request, 'index.html')
@@ -62,7 +62,7 @@ def index(request):
         for event in events:
             # Extract relevant information from the user dictionary
             event_name = event['name']
-            venue_name = event['name']['last']
+            venue_name = event['venue']['name']
             # email = user['email']
             # phone = user['phone']
             # picture = user['picture']['large']
