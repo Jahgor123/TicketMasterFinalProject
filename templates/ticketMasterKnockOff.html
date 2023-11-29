@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,23 +12,27 @@
     <!--JQuery-->
     <script src="../css%20+%20js/jQuery-3.7.1.min.js"></script>
     <!--CSS-->
-    <link rel="stylesheet" href="h4style.css">
+    <link rel="stylesheet" href="{% static 'css/h4style.css' %}">
     <!--JS-->
     <script src="../css%20+%20js/final.js"></script>
 
 </head>
 <body>
 <div class="container-fluid" id="heading">
-    <img src="../css%20+%20js/LogoTwo.png" id="logo" alt="logoImg">
+    <img src="{% static 'images/cat.png' %}" id="logo" alt="logoImg">
     <h1 class="padmar">Ticket Master</h1>
     <h2 class="padmar">Quickly find tickets around you!</h2>
     <p class="padmar">~This is a Ticket Master recreation~</p>
 
 
-    <form id="search-menu">
+    <form id="search-menu" action = "" method="post">
         <div class="row see-txt-bg">
-            <label for="pick-me">Search By</label>
-            <select name="pick-me" id="pick-me" class="col-4">
+
+
+            <!-- we'll leave this action empty meaning by default use existing id -->
+
+                <label for="pick-me">Search By</label>
+        <select name="pick-me" id="pick-me" class="col-4">
                 <option value="all">All</option>
                 <option value="art">Artist</option>
                 <option value="city">City</option>
@@ -35,7 +40,10 @@
                 <option value="gen">Genre</option>
             </select>
             <!--https://www.educba.com/html-search-bar/-->
-            <input type="text" name="searchbar" placeholder="Search" id="searchbar" class="col-4">
+    {% csrf_token %}
+    {{ form }}  <!-- as.div seperates each form on new line -->
+    <input type="submit" value="Update">
+
             <button type="button" class="btn col-4" id="search" onclick="getEvent()">Go!</button>
         </div>
     </form>
