@@ -44,7 +44,7 @@ def index(request):
         # Add code to handle or display the error_message as needed.
 
         # call get_tickets function() to get the data from the API
-    eventTickets = get_tickets(eventTerm, searchEvent)
+        eventTickets = get_tickets(eventTerm, searchEvent)
 
     # If the request to fetch data from randomuser was unsuccessful or returned None
     if eventTickets is None:

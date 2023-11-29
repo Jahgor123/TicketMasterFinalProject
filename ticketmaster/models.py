@@ -15,4 +15,4 @@ class Person(models.Model):
     # class that person object
     userName = models.CharField(max_length=50)
     passWord = models.CharField(max_length=50)
-    numOfTickets = models.DecimalField(max_digits=9, decimal_places=2)
+    eventCart = models.DecimalField(max_digits=9, decimal_places=2)
