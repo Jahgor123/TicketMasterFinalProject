@@ -25,14 +25,13 @@
     <p class="padmar">~This is a Ticket Master recreation~</p>
 
 
-    <form id="search-menu" action = "" method="post">
+    <form id="search-menu" action = "{% url 'index' %}" method="post">
         <div class="row see-txt-bg">
 
 
             <!-- we'll leave this action empty meaning by default use existing id -->
-
                 <label for="pick-me">Search By</label>
-        <select name="pick-me" id="pick-me" class="col-4">
+                <select name="pick-me" id="pick-me" class="col-4">
                 <option value="all">All</option>
                 <option value="art">Artist</option>
                 <option value="city">City</option>
@@ -41,10 +40,13 @@
             </select>
             <!--https://www.educba.com/html-search-bar/-->
     {% csrf_token %}
-    {{ form }}  <!-- as.div seperates each form on new line -->
-    <input type="submit" value="Update">
 
-            <button type="button" class="btn col-4" id="search" onclick="getEvent()">Go!</button>
+    <input type="text" name="searchbar" placeholder="Search" id="searchbar" class="col-4">
+    <input class="btn btn-primary" type="submit" value="GO" class="col-4">
+            <!-- to use GO in views (form.cleaned_data['description']) -->
+          <!--  we want to get two input from client to server we want -->
+
+       <!--     <button type="button" class="btn col-4" id="search" onclick="getEvent()">Go!</button>  -->
         </div>
     </form>
     <!--Advanced search is currently not working as expected, not filling data in properly due to json file missing or renaming data will continue to work on-->
