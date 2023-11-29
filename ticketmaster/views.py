@@ -8,3 +8,4 @@ def view_home(request):
   #  print(response.json())
 
     return render(request, 'ticketMasterKnockOff.html')
+
