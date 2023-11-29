@@ -18,11 +18,18 @@ def view_results(request):
 
 
 def index(request):
+    # Initialize eventTerm with a default value
+    # eventTerm = 'default_event_type'
+
     # if the request method is a post
     if request.method == 'POST':
         # get the search term and location
-        eventTerm = request.POST['pick-me']
-        searchEvent = request.POST['searchbar']
+
+        # eventTerm = request.POST['pick-me']
+        # searchEvent = request.POST['searchbar']
+
+        eventTerm = request.POST.get('pick-me')
+        searchEvent = request.POST.get('searchbar')
 
         print(eventTerm)
         print(searchEvent)
@@ -34,9 +41,9 @@ def index(request):
             #     # redirect user to the index page
             return redirect('index')
 
-    # Add code to handle or display the error_message as needed.
+        # Add code to handle or display the error_message as needed.
 
-    # call get_tickets function() to get the data from the API
+        # call get_tickets function() to get the data from the API
     eventTickets = get_tickets(eventTerm, searchEvent)
 
     # If the request to fetch data from randomuser was unsuccessful or returned None
@@ -47,6 +54,7 @@ def index(request):
         return redirect('index')
 
     else:
+
         # print the response for testing purpose (open "Run" at the bottom to see what is printed)
         print(eventTickets)
         # Store each event information in a variable
@@ -92,21 +100,14 @@ def index(request):
     context = {}
     return render(request, 'index.html', context)
 
-
-# all other cases, just render the page without sending/passing any context to the template
-# return render(request, 'randomuser/index.html')
+    # all other cases, just render the page without sending/passing any context to the template
+    return render(request, 'index.html')
 
 
 # def get_tickets(number_of_events, gender, nationality):
 # def get_tickets(number_of_events, eventTerm, searchTerm):
 def get_tickets(eventTerm, searchTerm):
     try:
-        # searchBar Id
-        #  searchTerm = update
-        # searchstate Id
-        #  searchState = $('input[name=state]').val().trim();
-        # location ID
-        #    location = $('input[name=location]').val().trim();
         # API key
         api_key = "tIrapX2vWcsnEvoKHUkI25bDu0lTcYVT"
         # Construct the URL with parameters
