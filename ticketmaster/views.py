@@ -28,14 +28,14 @@ def index(request):
         # searchEvent = request.POST['pick-me']
         # searchState = request.POST['searchbar']
 
-        searchEvent = request.POST.get('pick-me')
-        searchState = request.POST.get('searchState')
+        search_term = request.POST.get('term')
+        search_city = request.POST.get('city')
 
-        print(searchEvent)
-        print(searchState)
+        print(search_term)
+        print(search_city)
 
         # Check if searchState is empty
-        if not searchEvent:
+        if not search_term:
             # Set up an error message using Django's message utility to inform the user
             messages.info(request, 'Both event and state are required fields.')
             #     # redirect user to the index page
@@ -44,7 +44,7 @@ def index(request):
         # Add code to handle or display the error_message as needed.
 
         # call get_tickets function() to get the data from the API
-        eventTickets = get_tickets(searchEvent, searchState)
+        eventTickets = get_tickets(search_term, search_city)
         # print(eventTickets.encode('utf-8'))
 
         # If the request to fetch data from randomuser was unsuccessful or returned None
@@ -110,7 +110,7 @@ def index(request):
     return render(request, 'index.html')
 
 
-def get_tickets(searchEvent, searchState):
+def get_tickets(search_term, search_city):
     try:
         # API key
         api_key = "tIrapX2vWcsnEvoKHUkI25bDu0lTcYVT"
@@ -120,8 +120,8 @@ def get_tickets(searchEvent, searchState):
         # The query parameters will be appended to the url such as https://randomuser.me/api/?results=5&gender=female&nat=us
         params = {
             "apikey": api_key,
-            "keyword": searchEvent,
-            "state": searchState
+            "keyword": search_term,
+            "city": search_city
         }
 
         # Send a GET request to the specified URL with parameters
