@@ -35,7 +35,7 @@ def index(request):
         print(searchState)
 
         # Check if searchState is empty
-        if not searchEvent or not searchState:
+        if not searchEvent:
             # Set up an error message using Django's message utility to inform the user
             messages.info(request, 'Both event and state are required fields.')
             #     # redirect user to the index page
@@ -45,7 +45,7 @@ def index(request):
 
         # call get_tickets function() to get the data from the API
         eventTickets = get_tickets(searchEvent, searchState)
-        print(eventTickets)
+        # print(eventTickets.encode('utf-8'))
 
         # If the request to fetch data from randomuser was unsuccessful or returned None
         if eventTickets is None:
@@ -57,7 +57,7 @@ def index(request):
         else:
 
             # print the response for testing purpose (open "Run" at the bottom to see what is printed)
-            print(eventTickets)
+            # print(eventTickets.encode('utf-8'))
             # Store each event information in a variable
             events = eventTickets['_embedded']['events']
 
@@ -72,6 +72,8 @@ def index(request):
                 # Extract relevant information from the user dictionary
                 event_name = event['name']
                 image = event['images'][0]['url']
+                venueAddress = event['_embedded']['venues'][0]['address']['line1']
+                # venueAddress = event['_embedded']['venues'][0]['address']['line1']
                 # venueCity = event['images'][0]['url']
                 # email = user['email']
                 # phone = user['phone']
@@ -89,6 +91,7 @@ def index(request):
                 event_details = {
                     'eventName': event_name,
                     'image': image,
+                    'Address': venueAddress
                     # 'email': email,
                     # 'phone': phone,
                     # 'picture': picture,
