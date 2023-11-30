@@ -18,36 +18,36 @@ def view_results(request):
 
 
 def index(request):
-    # Initialize eventTerm with a default value
-    # eventTerm = 'default_event_type'
+    # Initialize searchEvent with a default value
+    # searchEvent = 'default_event_type'
 
     # if the request method is a post
     if request.method == 'POST':
         # get the search term and location
 
-        # eventTerm = request.POST['pick-me']
-        # searchEvent = request.POST['searchbar']
+        # searchEvent = request.POST['pick-me']
+        # searchState = request.POST['searchbar']
 
-        eventTerm = request.POST.get('pick-me')
-        searchEvent = request.POST.get('searchbar')
+        searchEvent = request.POST.get('pick-me')
+        searchState = request.POST.get('searchState')
 
-        print(eventTerm)
         print(searchEvent)
+        print(searchState)
 
-        # Check if searchEvent is empty
-        if not searchEvent:
+        # Check if searchState is empty
+        if not searchEvent or not searchState:
             # Set up an error message using Django's message utility to inform the user
-            messages.info(request, 'Both number of users and gender are required fields.')
+            messages.info(request, 'Both event and state are required fields.')
             #     # redirect user to the index page
             return redirect('index')
 
         # Add code to handle or display the error_message as needed.
 
         # call get_tickets function() to get the data from the API
-        eventTickets = get_tickets(eventTerm, searchEvent)
+        eventTickets = get_tickets(searchEvent, searchState)
         print(eventTickets)
 
-    # If the request to fetch data from randomuser was unsuccessful or returned None
+        # If the request to fetch data from randomuser was unsuccessful or returned None
         if eventTickets is None:
             # Set up an error message using Django's message utility to inform the user
             messages.info(request, 'The server encountered an issue while fetching data. Please try again later.')
@@ -72,6 +72,7 @@ def index(request):
                 # Extract relevant information from the user dictionary
                 event_name = event['name']
                 image = event['images'][0]['url']
+                # venueCity = event['images'][0]['url']
                 # email = user['email']
                 # phone = user['phone']
                 # picture = user['picture']['large']
@@ -79,10 +80,10 @@ def index(request):
 
                 # Format the registration date from "2004-03-12T17:05:44.193Z" to "2004"
                 # Extract the first 10 characters to get the date portion, then convert to a datetime object
-                #date_object = datetime.strptime(registration_date[:10], "%Y-%m-%d")
+                # date_object = datetime.strptime(registration_date[:10], "%Y-%m-%d")
 
                 # Format the date object to a more readable format, e.g., "Sat Nov 03 2023"
-                #registration_date = date_object.strftime("%a %b %d %Y")
+                # registration_date = date_object.strftime("%a %b %d %Y")
 
                 # Create a new dictionary to store user details
                 event_details = {
@@ -106,9 +107,7 @@ def index(request):
     return render(request, 'index.html')
 
 
-# def get_tickets(number_of_events, gender, nationality):
-# def get_tickets(number_of_events, eventTerm, searchTerm):
-def get_tickets(eventTerm, searchTerm):
+def get_tickets(searchEvent, searchState):
     try:
         # API key
         api_key = "tIrapX2vWcsnEvoKHUkI25bDu0lTcYVT"
@@ -118,8 +117,8 @@ def get_tickets(eventTerm, searchTerm):
         # The query parameters will be appended to the url such as https://randomuser.me/api/?results=5&gender=female&nat=us
         params = {
             "apikey": api_key,
-            "eventType": eventTerm,
-            "state": searchTerm
+            "keyword": searchEvent,
+            "state": searchState
         }
 
         # Send a GET request to the specified URL with parameters
@@ -139,3 +138,15 @@ def get_tickets(eventTerm, searchTerm):
 
         # Return None to indicate failure
         return None
+
+
+def logIn(request):
+    return render(request, 'logInPage.html')
+
+
+def cart(request):
+    return render(request, 'cart.html')
+
+
+def results(request):
+    return render(request, 'results.html')

@@ -9,17 +9,15 @@
     <!--Boot-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <!--JQuery-->
-    <script src="../css%20+%20js/jQuery-3.7.1.min.js"></script>
     <!--CSS-->
     <link rel="stylesheet" href="{% static 'css/h4style.css' %}">
-    <!--JS-->
-    <script src="../css%20+%20js/final.js"></script>
 
 </head>
 <body>
 <div class="container-fluid" id="heading">
-    <img src="{% static 'images/cat.png' %}" id="logo" alt="logoImg">
+
+<button type="button" class="btn col-4 log-in"> <img src="{% static 'images/Login.png' %}" id="logo" alt="logoImg" class="log-in-img"> Login In</button>
+    <img src="{% static 'images/LogoTwo.png' %}" id="logo" alt="logoImg">
     <h1 class="padmar">Ticket Master</h1>
     <h2 class="padmar">Quickly find tickets around you!</h2>
     <p class="padmar">~This is a Ticket Master recreation~</p>
@@ -30,25 +28,15 @@
 
 
             <!-- we'll leave this action empty meaning by default use existing id -->
-            <label for="pick-me">Search By</label>
-            <select name="pick-me" id="pick-me" class="col-4">
-                <option value="all">All</option>
-                <option value="art">Artist</option>
-                <option value="city">City</option>
-                <option value="eve">Event Type</option>
-                <option value="gen">Genre</option>
-            </select>
+
             <!--https://www.educba.com/html-search-bar/-->
             {% csrf_token %}
-
-            <input type="text" name="searchbar" placeholder="Search" id="searchbar" class="col-4">
+            <input type="text" name="pick-me" placeholder="Search for event" id="pick-me" class="col-4">
+            <input type="text" name="searchState" placeholder="Search in state"  id="searchState" class="col-4">
             <input class="btn btn-primary" type="submit" value="GO" class="col-4">
 
         </div>
     </form>
-    <!--Advanced search is currently not working as expected, not filling data in properly due to json file missing or renaming data will continue to work on-->
-    <!--<button type="button" class="btn col-4" id="search-more" onclick="advanced()">Advanced Search</button>-->
-
 
     {% for event in events %}
         <div class="padding-margin border shadow p-4 mb-4 rounded style-card">
