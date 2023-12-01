@@ -73,8 +73,8 @@ def index(request):
                 event_name = event['name']
                 image = event['images'][0]['url']
                 venueAddress = event['_embedded']['venues'][0]['address']['line1']
-                # venueAddress = event['_embedded']['venues'][0]['address']['line1']
-                # venueCity = event['images'][0]['url']
+                EventDate = event['dates']['start']['localDate']
+                EventFormalStartTime = event['dates']['start']['localTime']
                 # email = user['email']
                 # phone = user['phone']
                 # picture = user['picture']['large']
@@ -91,7 +91,9 @@ def index(request):
                 event_details = {
                     'eventName': event_name,
                     'image': image,
-                    'Address': venueAddress
+                    'Address': venueAddress,
+                    'Date': EventDate,
+                    'Time': EventFormalStartTime
                     # 'email': email,
                     # 'phone': phone,
                     # 'picture': picture,
