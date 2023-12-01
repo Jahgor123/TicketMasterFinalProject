@@ -4,6 +4,8 @@ import requests
 from datetime import datetime
 from django.contrib import messages
 
+from ticketmaster.models import Ticket
+
 
 def view_home(request):
     response = requests.get(
@@ -105,6 +107,10 @@ def index(request):
 
         # Create a context dictionary with the user_list and render the 'index.html' template
         context = {'events': event_list}
+
+        # store tickets into database for requirement 2 lol
+        Ticket.objects.create(description=event_name)
+
         return render(request, 'index.html', context)
 
         # all other cases, just render the page without sending/passing any context to the template
@@ -144,6 +150,11 @@ def get_tickets(search_term, search_city):
         # Return None to indicate failure
         return None
 
+
+def store_tickets_to_database(request,ticket):
+    context = {}    # empty dictionary
+
+    return render(request,'cart.html' , context)
 
 def logIn(request):
     return render(request, 'logInPage.html')
