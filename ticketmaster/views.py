@@ -5,6 +5,7 @@ from datetime import datetime
 from django.contrib import messages
 
 from ticketmaster.models import Ticket
+from django.contrib.auth.models import User
 
 
 def view_home(request):
@@ -78,7 +79,7 @@ def index(request):
                 event_date = event['dates']['start']['localDate']
                 event_formal_start_time = event['dates']['start']['localTime']
                 # event_ticket_link = event['outlets'][0]['url']
-                event_price = 60 # default value for ticket prices if they don't exist
+                event_price = 60  # default value for ticket prices if they don't exist
                 if 'priceRanges' in event:
                     if event['priceRanges']:
                         event_price = event['priceRanges'][0]['min']
@@ -167,7 +168,7 @@ def clear_tickets_from_database(request, ticket):
     return
 
 
-def logIn(request):
+def log_in(request):
     return render(request, 'logInPage.html')
 
 
@@ -175,5 +176,10 @@ def cart(request):
     return render(request, 'cart.html')
 
 
-def results(request):
-    return render(request, 'results.html')
+def create_user(username, password, email, first_name, last_name):
+    # creates user object that will be saved to auth_user database
+    user = User.objects.create_user(username, None, password)
+    user.save()
+
+def check_if_auth():
+

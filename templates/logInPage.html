@@ -25,11 +25,13 @@ References: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_login_
 
 
 <div class="container-fluid" id="log-me">
-    <input type="text" name="Username" placeholder="Username" id="username">
+    <form action="_{% url 'index' %}" method="post">
+    <input type="text" name="Username" placeholder="Username" id="username" type="submit" value="username">
     <label for="username"></label>
-    <input type="password" name="Password" placeholder="Password" id="password">
+    <input type="password" name="Password" placeholder="Password" id="password" type="submit" value="password">
     <label for="password"></label>
     <br>
+    </form>
     <a>Forgot Password</a>
     <button class="log-in" id="log-in-button">Log In</button>
 </div>
