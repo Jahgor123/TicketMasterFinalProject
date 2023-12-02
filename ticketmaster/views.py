@@ -87,7 +87,7 @@ def index(request):
                     if event['priceRanges']:
                         event_price = event['priceRanges'][0]['min']
 
-                # event_ticket_link = event['url']
+                event_ticket_link = event['url']
                 # if 'outlets' in event:
                 #     if event['outlets']:
                 #         event_ticket_link = event['url']
@@ -108,7 +108,7 @@ def index(request):
                     'Address': venue_address,
                     'Date': event_date,
                     'Time': event_formal_start_time,
-                    # 'TicketLink': event_ticket_link,
+                    'event_ticket_link': event_ticket_link,
                     'price': event_price
                 }
 
