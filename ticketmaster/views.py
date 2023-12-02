@@ -78,19 +78,17 @@ def index(request):
                 event_date = event['dates']['start']['localDate']
                 event_formal_start_time = event['dates']['start']['localTime']
                 # event_ticket_link = event['outlets'][0]['url']
-                event_price = 0
+                event_price = 60 # default value for ticket prices if they don't exist
                 if 'priceRanges' in event:
                     if event['priceRanges']:
                         event_price = event['priceRanges'][0]['min']
 
-                # event_ticket_link = 0
+                # event_ticket_link = event['url']
                 # if 'outlets' in event:
                 #     if event['outlets']:
-                #         event_ticket_link = event['outlets'][0]['url']
-                # email = user['email']
-                # phone = user['phone']
-                # picture = user['picture']['large']
-                # registration_date = user['registered']['date']
+                #         event_ticket_link = event['url']
+                # else:
+                #     event_ticket_link = event['_links']['self']['href']
 
                 # Format the registration date from "2004-03-12T17:05:44.193Z" to "2004"
                 # Extract the first 10 characters to get the date portion, then convert to a datetime object
@@ -108,10 +106,6 @@ def index(request):
                     'Time': event_formal_start_time,
                     # 'TicketLink': event_ticket_link,
                     'price': event_price
-                    # 'email': email,
-                    # 'phone': phone,
-                    # 'picture': picture,
-                    # 'registration_date': registration_date
                 }
 
                 # Append the user details dictionary to the user_list
