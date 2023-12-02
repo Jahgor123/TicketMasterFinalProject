@@ -215,4 +215,6 @@ def login_view(request):
         else:
             # User was not authenticated
             form = AuthenticationForm()
-            return render('noUserFound')
+            return render(request, 'noUserFound.html')
+
+    return render(request, 'logInPage.html')
