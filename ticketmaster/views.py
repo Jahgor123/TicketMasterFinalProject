@@ -8,6 +8,7 @@ from django.contrib import messages
 from ticketmaster.models import Ticket
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import AuthenticationForm
 
 
 def view_home(request):
@@ -201,16 +202,17 @@ def register_view(request):
     return render(request, 'accounts/register.html', {'form': form})
 
 
-def check_if_auth(request):
+def login_view(request):
     if request.method == 'POST':
         username = request.POST.get('Username')
         password = request.POST.get('Password')
 
         user = authenticate(request, username=username, password=password)
-    if user is not None:
-        # User was authenticated
-        # redirect to the index page upon successful login
-        return redirect('index')
-    else:
-        # User was not authenticated
-        return render('noUserFound')
+        if user is not None:
+            # User was authenticated
+            # redirect to the index page upon successful login
+            return redirect('index')
+        else:
+            # User was not authenticated
+            form = AuthenticationForm()
+            return render('noUserFound')

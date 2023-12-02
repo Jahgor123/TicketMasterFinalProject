@@ -25,7 +25,7 @@ References: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_login_
 
 
 <div class="container-fluid" id="log-me">
-    <form action="{% url 'check_if_auth' %}" method="post">
+    <form action="{% url 'login' %}" method="post">
         {% csrf_token %}
     <input type="text" name="Username" placeholder="Username" id="username" type="submit" value="username">
     <label for="username"></label>
