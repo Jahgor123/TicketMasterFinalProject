@@ -77,7 +77,7 @@ def index(request):
                 venue_address = event['_embedded']['venues'][0]['address']['line1']
                 event_date = event['dates']['start']['localDate']
                 event_formal_start_time = event['dates']['start']['localTime']
-                #event_ticket_link = event['outlets'][0]['url']
+                # event_ticket_link = event['outlets'][0]['url']
                 event_price = 0
                 if 'priceRanges' in event:
                     if event['priceRanges']:
@@ -106,7 +106,7 @@ def index(request):
                     'Address': venue_address,
                     'Date': event_date,
                     'Time': event_formal_start_time,
-                    #'TicketLink': event_ticket_link,
+                    # 'TicketLink': event_ticket_link,
                     'price': event_price
                     # 'email': email,
                     # 'phone': phone,
@@ -121,7 +121,6 @@ def index(request):
 
         # Create a context dictionary with the user_list and render the 'index.html' template
         context = {'events': event_list}
-
 
         return render(request, 'index.html', context)
 
@@ -167,6 +166,11 @@ def store_tickets_to_database(request, ticket):
     context = {}  # empty dictionary
 
     return render(request, 'cart.html', context)
+
+
+def clear_tickets_from_database(request, ticket):
+    clear_all_tickets = Ticket.objects.all().delete()
+    return
 
 
 def logIn(request):
