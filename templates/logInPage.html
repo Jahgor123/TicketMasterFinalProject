@@ -25,15 +25,16 @@ References: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_login_
 
 
 <div class="container-fluid" id="log-me">
-    <form action="_{% url 'index' %}" method="post">
+    <form action="{% url 'check_if_auth' %}" method="post">
+        {% csrf_token %}
     <input type="text" name="Username" placeholder="Username" id="username" type="submit" value="username">
     <label for="username"></label>
     <input type="password" name="Password" placeholder="Password" id="password" type="submit" value="password">
     <label for="password"></label>
     <br>
-    </form>
     <a>Forgot Password</a>
-    <button class="log-in" id="log-in-button">Log In</button>
+    <button type= "submit" class="log-in" id="log-in-button"> Login</button>
+         </form>
 </div>
 </body>
 </html>

@@ -14,13 +14,27 @@
 
 </head>
 <body>
-<div class="container-fluid" id="heading">
 
-    <button type="button" class="btn col-4 log-in">
-        <a href="{% url 'login' %}">
-            <img src="{% static 'images/Login.png' %}" id="logo" alt="logoImg" class="log-in-img" type="submit" name="login"> Login In
-        </a>
-    </button>
+<div class="container-fluid" id="heading">
+    {% if user.is_authenticated %}
+        <div class="container" >
+
+            {#            <img src="{% static 'images/Login.png' %}" id="logo" alt="logoImg" class="log-in-img" type="submit" name="login"> Login In#}
+            <p class="float-right" > Welcome, {{ username }}
+                <img src="{% static 'images/cat.png' %}" >
+
+                {% else %}
+                <button type="button" class="btn col-4 log-in">
+                    <a href="{% url 'login' %}">
+                        <img src="{% static 'images/Login.png' %}" id="logo" alt="logoImg" class="log-in-img" type="submit" name="login"> Login In
+                    </a>
+                </button>
+
+        </div>
+
+    {% endif %}
+
+
 
     {#<button type="button" class="btn col-4 log-in"> <img src="{% static 'images/Login.png' %}" id="logo" alt="logoImg" class="log-in-img" type="submit" name="login"> Login In</button>#}
     {#<input type="button" class="btn col-4 log-in"> <img src="{% static 'images/Login.png' %}" id="logo" alt="logoImg" class="log-in-img" type="submit" name="login"> Login In#}
