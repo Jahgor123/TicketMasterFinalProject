@@ -1,3 +1,4 @@
+from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 # Make sure to install requests using 'pip install requests' on your terminal, otherwise 'requests' will not work
 import requests
@@ -6,7 +7,7 @@ from django.contrib import messages
 
 from ticketmaster.models import Ticket
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login
 
 
 def view_home(request):
@@ -181,6 +182,23 @@ def create_user(username, password, email, first_name, last_name):
     # creates user object that will be saved to auth_user database
     user = User.objects.create_user(username, None, password)
     user.save()
+
+
+def register_view(request):
+    # This function renders the registration form page and create a new user based on the form data
+    if request.method == 'POST':
+        # We use Django's UserCreationForm which is a model created by Django to create a new user.
+        # UserCreationForm has three fields by default: username (from the user model), password1, and password2.
+        form = UserCreationForm(request.POST)
+        # check whether it's valid: for example it verifies that password1 and password2 match
+        if form.is_valid():
+            form.save()
+            # redirect the user to login page so that after registration the user can enter the credentials
+            return redirect('login')
+    else:
+        # Create an empty instance of Django's UserCreationForm to generate the necessary html on the template.
+        form = UserCreationForm()
+    return render(request, 'accounts/register.html', {'form': form})
 
 
 def check_if_auth(request):
