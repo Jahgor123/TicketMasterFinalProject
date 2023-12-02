@@ -74,9 +74,19 @@ def index(request):
                 # Extract relevant information from the user dictionary
                 event_name = event['name']
                 image = event['images'][0]['url']
-                venueAddress = event['_embedded']['venues'][0]['address']['line1']
-                EventDate = event['dates']['start']['localDate']
-                EventFormalStartTime = event['dates']['start']['localTime']
+                venue_address = event['_embedded']['venues'][0]['address']['line1']
+                event_date = event['dates']['start']['localDate']
+                event_formal_start_time = event['dates']['start']['localTime']
+                #event_ticket_link = event['outlets'][0]['url']
+                event_price = 0
+                if 'priceRanges' in event:
+                    if event['priceRanges']:
+                        event_price = event['priceRanges'][0]['min']
+
+                # event_ticket_link = 0
+                # if 'outlets' in event:
+                #     if event['outlets']:
+                #         event_ticket_link = event['outlets'][0]['url']
                 # email = user['email']
                 # phone = user['phone']
                 # picture = user['picture']['large']
@@ -93,9 +103,11 @@ def index(request):
                 event_details = {
                     'eventName': event_name,
                     'image': image,
-                    'Address': venueAddress,
-                    'Date': EventDate,
-                    'Time': EventFormalStartTime
+                    'Address': venue_address,
+                    'Date': event_date,
+                    'Time': event_formal_start_time,
+                    #'TicketLink': event_ticket_link,
+                    'price': event_price
                     # 'email': email,
                     # 'phone': phone,
                     # 'picture': picture,
@@ -104,12 +116,12 @@ def index(request):
 
                 # Append the user details dictionary to the user_list
                 event_list.append(event_details)
+                # store tickets into database for requirement 3 lol
+                Ticket.objects.create(Name=event_name, quantity=1, price=event_price)
 
         # Create a context dictionary with the user_list and render the 'index.html' template
         context = {'events': event_list}
 
-        # store tickets into database for requirement 2 lol
-        Ticket.objects.create(description=event_name)
 
         return render(request, 'index.html', context)
 
@@ -151,10 +163,11 @@ def get_tickets(search_term, search_city):
         return None
 
 
-def store_tickets_to_database(request,ticket):
-    context = {}    # empty dictionary
+def store_tickets_to_database(request, ticket):
+    context = {}  # empty dictionary
 
-    return render(request,'cart.html' , context)
+    return render(request, 'cart.html', context)
+
 
 def logIn(request):
     return render(request, 'logInPage.html')
