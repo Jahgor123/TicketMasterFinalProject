@@ -119,6 +119,9 @@ body {
 
 .style-card {
     background: rgba(236, 164, 0, 0.6);
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .results-cart {
@@ -131,3 +134,6 @@ body {
     margin-right: auto;
 }
 
+#results-in-cart {
+    text-align: left;
+}
