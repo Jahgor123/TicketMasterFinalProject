@@ -217,6 +217,7 @@ def login_view(request):
         if user is not None:
             # User was authenticated
             # redirect to the index page upon successful login
+
             # login in the user
             login(request, user)
             return redirect('index')
