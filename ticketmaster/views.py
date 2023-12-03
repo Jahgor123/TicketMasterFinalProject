@@ -162,6 +162,8 @@ def get_tickets(search_term, search_city):
 
 def store_tickets_to_database(request, ticket):
     context = {}  # empty dictionary
+    for ticket in ticket:
+        context = ticket
 
     return render(request, 'cart.html', context)
 
@@ -171,7 +173,8 @@ def clear_tickets_from_database(request, ticket):
     return
 
 
-def log_in(request):
+def add_wish_list(request, context):
+    event_list = []
     return render(request, 'logInPage.html')
 
 
@@ -179,10 +182,10 @@ def cart(request):
     return render(request, 'cart.html')
 
 
-def create_user(username, password, email, first_name, last_name):
-    # creates user object that will be saved to auth_user database
-    user = User.objects.create_user(username, None, password)
-    user.save()
+# def create_user(username, password, email, first_name, last_name):
+#     # creates user object that will be saved to auth_user database
+#     user = User.objects.create_user(username, None, password)
+#     user.save()
 
 
 def register_view(request):
