@@ -7,7 +7,7 @@ from django.contrib import messages
 
 from ticketmaster.models import Ticket
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 
 
@@ -226,3 +226,11 @@ def login_view(request):
             return render(request, 'noUserFound.html')
 
     return render(request, 'logInPage.html')
+
+
+def logout_view(request):
+    # Log out user
+    logout(request)
+    # Redirect to index with user logged out
+    return redirect('index')
+
