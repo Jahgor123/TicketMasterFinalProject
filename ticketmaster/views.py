@@ -50,11 +50,11 @@ def index(request):
         # Add code to handle or display the error_message as needed.
 
         # call get_tickets function() to get the data from the API
-        eventTickets = get_tickets(search_term, search_city)
-        print(eventTickets)
+        event_tickets = get_tickets(search_term, search_city)
+        print(event_tickets)
 
         # If the request to fetch data from randomuser was unsuccessful or returned None
-        if eventTickets is None:
+        if event_tickets is None:
             # Set up an error message using Django's message utility to inform the user
             messages.info(request, 'The server encountered an issue while fetching data. Please try again later.')
             # redirect user to the index page
@@ -65,7 +65,7 @@ def index(request):
             # print the response for testing purpose (open "Run" at the bottom to see what is printed)
             # print(eventTickets.encode('utf-8'))
             # Store each event information in a variable
-            events = eventTickets['_embedded']['events']
+            events = event_tickets['_embedded']['events']
 
             # Initialize an empty list to store user data
             event_list = []
@@ -172,6 +172,9 @@ def clear_tickets_from_database(request, ticket):
     clear_all_tickets = Ticket.objects.all().delete()
     return
 
+
+# To implement wish_list I can create all the attributes needed and store them in the ticket
+# then each person can have a wishlist id which stores an array of tickets
 
 def add_wish_list(request, context):
     event_list = []
