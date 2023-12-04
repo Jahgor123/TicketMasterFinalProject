@@ -120,11 +120,11 @@ def index(request):
         # Create a context dictionary with the user_list and render the 'index.html' template
         context = {'events': event_list}
 
-        return render(request, '../../mockDiscord/templates/index.html', context)
+        return render(request, 'index.html', context)
 
         # all other cases, just render the page without sending/passing any context to the template
 
-    return render(request, '../../mockDiscord/templates/index.html')
+    return render(request, 'index.html')
 
 
 def get_tickets(search_term, search_city):
