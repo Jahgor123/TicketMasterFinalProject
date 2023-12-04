@@ -178,7 +178,7 @@ def clear_tickets_from_database(request, ticket):
 
 def add_wish_list(request, context):
     event_list = []
-    return render(request, '../../mockDiscord/templates/logInPage.html')
+    return render(request, 'logInPage.html')
 
 
 def cart(request):
@@ -206,7 +206,7 @@ def register_view(request):
         # Create an empty instance of Django's UserCreationForm to generate the necessary html on the template.
         form = UserCreationForm()
     # return render(request, 'accounts/register.html', {'form': form})
-    return render(request, '../../mockDiscord/templates/register.html', {'form': form})
+    return render(request, 'register.html', {'form': form})
 
 
 def login_view(request):
@@ -225,9 +225,9 @@ def login_view(request):
         else:
             # User was not authenticated
             form = AuthenticationForm()
-            return render(request, '../../mockDiscord/templates/noUserFound.html')
+            return render(request, 'noUserFound.html')
 
-    return render(request, '../../mockDiscord/templates/logInPage.html')
+    return render(request, 'logInPage.html')
 
 
 def logout_view(request):
