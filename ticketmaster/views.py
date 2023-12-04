@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 # Make sure to install requests using 'pip install requests' on your terminal, otherwise 'requests' will not work
@@ -235,4 +236,10 @@ def logout_view(request):
     logout(request)
     # Redirect to index with user logged out
     return redirect('index')
+
+
+# # to restrict user from reaching this page if not login
+# @login_required(login_url='login')
+# def my_view(request):
+#     ...
 
