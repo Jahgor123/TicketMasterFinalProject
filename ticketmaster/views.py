@@ -16,11 +16,11 @@ def view_home(request):
         'https://app.ticketmaster.com/discovery/v2/events.json?sort=date,asc&tIrapX2vWcsnEvoKHUkI25bDu0lTcYVT')
     print(response.json())
 
-    return render(request, 'index.html')
+    return render(request, '../../mockDiscord/templates/index.html')
 
 
 def view_results(request):
-    return render(request, 'index.html')
+    return render(request, '../../mockDiscord/templates/index.html')
 
 
 def index(request):
@@ -120,11 +120,11 @@ def index(request):
         # Create a context dictionary with the user_list and render the 'index.html' template
         context = {'events': event_list}
 
-        return render(request, 'index.html', context)
+        return render(request, '../../mockDiscord/templates/index.html', context)
 
         # all other cases, just render the page without sending/passing any context to the template
 
-    return render(request, 'index.html')
+    return render(request, '../../mockDiscord/templates/index.html')
 
 
 def get_tickets(search_term, search_city):
@@ -178,7 +178,7 @@ def clear_tickets_from_database(request, ticket):
 
 def add_wish_list(request, context):
     event_list = []
-    return render(request, 'logInPage.html')
+    return render(request, '../../mockDiscord/templates/logInPage.html')
 
 
 def cart(request):
@@ -206,7 +206,7 @@ def register_view(request):
         # Create an empty instance of Django's UserCreationForm to generate the necessary html on the template.
         form = UserCreationForm()
     # return render(request, 'accounts/register.html', {'form': form})
-    return render(request, 'register.html', {'form': form})
+    return render(request, '../../mockDiscord/templates/register.html', {'form': form})
 
 
 def login_view(request):
@@ -225,9 +225,9 @@ def login_view(request):
         else:
             # User was not authenticated
             form = AuthenticationForm()
-            return render(request, 'noUserFound.html')
+            return render(request, '../../mockDiscord/templates/noUserFound.html')
 
-    return render(request, 'logInPage.html')
+    return render(request, '../../mockDiscord/templates/logInPage.html')
 
 
 def logout_view(request):
