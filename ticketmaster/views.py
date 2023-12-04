@@ -205,7 +205,8 @@ def register_view(request):
     else:
         # Create an empty instance of Django's UserCreationForm to generate the necessary html on the template.
         form = UserCreationForm()
-    return render(request, 'accounts/register.html', {'form': form})
+    # return render(request, 'accounts/register.html', {'form': form})
+    return render(request, 'register.html', {'form': form})
 
 
 def login_view(request):
