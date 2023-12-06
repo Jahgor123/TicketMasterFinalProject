@@ -184,6 +184,20 @@ def add_wish_list(request, context):
     return render(request, 'logInPage.html')
 
 
+def cart_add(request, ticket, amount):
+    # Add to cart
+    # user presses add to cart (needs quantity)
+    # asks for the quantity (drop down limit 10 tickets or text field)
+    # data is saved to the structure
+    # user has a ticket cart field
+    # if authentic then cart icon appears (top right) and once pressed
+    # comes to this method which will take you to cart.html and load all your tickets
+
+    # TO ADD TO CART
+    # we add the ticket ie add_cart_to_user = Ticket()
+
+    return render(request, 'cart.html')
+
 
 def cart_pull(request):
     # open cart / view
