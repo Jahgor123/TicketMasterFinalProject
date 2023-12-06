@@ -17,11 +17,11 @@ def view_home(request):
         'https://app.ticketmaster.com/discovery/v2/events.json?sort=date,asc&tIrapX2vWcsnEvoKHUkI25bDu0lTcYVT')
     print(response.json())
 
-    return render(request, '../../mockDiscord/templates/index.html')
+    return render(request, 'index.html')
 
 
 def view_results(request):
-    return render(request, '../../mockDiscord/templates/index.html')
+    return render(request, 'index.html')
 
 
 def index(request):
@@ -179,17 +179,22 @@ def clear_tickets_from_database(request, ticket):
 
 def add_wish_list(request, context):
     event_list = []
+    # for something in something
+    #
     return render(request, 'logInPage.html')
 
 
-def cart(request):
+
+def cart_pull(request):
+    # open cart / view
+    # user presses add to cart (needs quantity)
+    # asks for the quantity (drop down limit 10 tickets or text field)
+    # data is saved to the structure
+    # user has a ticket cart field
+    # if authentic then cart icon appears (top right) and once pressed
+    # comes to this method which will take you to cart.html and load all your tickets
+
     return render(request, 'cart.html')
-
-
-# def create_user(username, password, email, first_name, last_name):
-#     # creates user object that will be saved to auth_user database
-#     user = User.objects.create_user(username, None, password)
-#     user.save()
 
 
 def register_view(request):
@@ -237,9 +242,9 @@ def logout_view(request):
     # Redirect to index with user logged out
     return redirect('index')
 
-
-# # to restrict user from reaching this page if not login
-# @login_required(login_url='login')
-# def my_view(request):
-#     ...
-
+    # # to restrict user from reaching this page if not login
+    # @login_required(login_url='login')
+    # def my_view(request):
+    #     Tickets = Ticket.objects.filter(user=request.user)
+    #     context = {'tickets':'tickets'}
+    ...
