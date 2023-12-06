@@ -247,4 +247,4 @@ def logout_view(request):
     # def my_view(request):
     #     Tickets = Ticket.objects.filter(user=request.user)
     #     context = {'tickets':'tickets'}
-    ...
+
