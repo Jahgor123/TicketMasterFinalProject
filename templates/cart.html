@@ -29,7 +29,7 @@
                 <button type="button" class=" log-in" type="submit" value="logout">
                     <a href="{% url 'logout' %}">Log Out</a>
                 </button>
-            <h1>Your Cart: {{ tickets_count }}</h1>
+            <h1>Your Cart: {{ tickets|length }}</h1>
             <hr>
             <div>
                 <h2>Your items:</h2>

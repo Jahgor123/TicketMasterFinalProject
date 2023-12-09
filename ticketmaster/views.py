@@ -310,8 +310,8 @@ def cart_view(request):
     # Fetch all tickets for the current user
     tickets = Ticket.objects.filter(user=request.user)
 
-    # Pass the tickets count to the template
-    context = {'tickets_count': tickets.count()}
+    # Pass the tickets and username to the template
+    context = {'tickets': tickets, 'username': request.user.username}
 
     # Render the 'cart.html' template with the tickets count
     return render(request, 'cart.html', context)
