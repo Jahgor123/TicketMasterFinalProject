@@ -1,5 +1,3 @@
-
-
 <!--
 Oliver Calandra
 References: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_login_form
@@ -19,17 +17,14 @@ References: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_login_
     <link rel="stylesheet" href="/static/css/h4style.css">
 
 <body>
-
-
-               <img src="{% static 'images/LogoTwo.png' %}" height="200px" width="200px"  >
-
-<h1>Register</h1>
- <form action="{% url 'register' %}" method="post">
- {% csrf_token %}
- {{ form.as_div }}
- <input type="submit" value="Register">
- </form>
-
-</div>
+    <img src="{% static 'images/LogoTwo.png' %}" id="logo" alt="logo">
+    <div id="reg">
+        <h1>Register: </h1>
+        <form action="{% url 'register' %}" method="post">
+            {% csrf_token %}
+            {{ form.as_div }}
+            <input type="submit" value="Register" id="log-in-button">
+        </form>
+    </div>
 </body>
 </html>

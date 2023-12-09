@@ -17,22 +17,23 @@
 
 <div class="container-fluid" id="heading">
     {% if user.is_authenticated %}
-        <div class="container" >
+        <div class="container">
 
-            {#            <img src="{% static 'images/Login.png' %}" id="logo" alt="logoImg" class="log-in-img" type="submit" name="login"> Login In#}
-            <p class="float-right" > Welcome, {{ username }}
-                <img src="{% static 'images/cat.png' %}" >
+            {#<img src="{% static 'images/Login.png' %}" id="logo" alt="logoImg" class="log-in-img" type="submit" name="login"> Login In#}
+            <p class="float-right"> Welcome, {{ username }}
+                <img src="{% static 'images/Login.png' %}" id=logo alt="logo">
 
-{#                display logout button on top right#}
-                <button type="button" class=" log-in" type="submit" value="logout">
+                {#display logout button on top right#}
+                <button type="button" class="log-in" type="submit" value="logout">
                     <a href="{% url 'logout' %}">Log Out</a>
                 </button>
 
 
                 {% else %}
-                <button type="button" class="btn col-4 log-in">
-                    <a href="{% url 'login' %}">
-                        <img src="{% static 'images/Login.png' %}" id="logo" alt="logoImg" class="log-in-img" type="submit" name="login"> Login In
+                <button type="button" class="btn col-4, log-in-button">
+                    <a href="{% url 'login' %}" id="log-in-txt">
+                        <img src="{% static 'images/Login.png' %}" id="log-in-img" alt="logoImg" class="log-in-img"
+                             type="submit" name="login">Login In
                     </a>
                 </button>
 
@@ -47,7 +48,7 @@
     <p class="padmar">~This is a Ticket Master recreation~</p>
 
 
-    <form id="search-menu" action = "{% url 'index' %}" method="post">
+    <form id="search-menu" action="{% url 'index' %}" method="post">
         <div class="row see-txt-bg">
 
 
@@ -55,10 +56,12 @@
 
             <!--https://www.educba.com/html-search-bar/-->
             {% csrf_token %}
-            <input type="text" name="term" placeholder="Search for event"  class="col-4">
-            <input type="text" name="city" placeholder="Search in state"  class="col-4">
-            <input class="btn btn-primary" type="submit" value="GO" class="col-4">
-
+            <div class="col-1"></div>
+            <input type="text" name="term" placeholder="Search for event:" class="txt-field col-5">
+            <input type="text" name="city" placeholder="Search in state:" class="txt-field col-5">
+            <div class="col-1"></div>
+            <hr>
+            <input class="btn" id="search-btn" type="submit" value="GO">
         </div>
     </form>
 
@@ -73,10 +76,14 @@
                         <h2 class="lead">When: {{ event.Date }} @ {{ event.Time }} </h2>
                         <h2 class="lead">Buy here: <a href="{{ event.event_ticket_link }}">Tickets</a></h2>
                         {% if user.is_authenticated %}
-                        <p class="lead">
-                            <button type="button" type="submit" value = "wishlist" class="btn col-4 log-in">Add to wishlist</button>
-                            <button type="button" type="submit" value = "userCart" class="btn col-4 log-in">Add to cart</button>
-                        </p>
+                            <p class="lead">
+                                <button type="button" type="submit" value="wishlist" class="btn col-4 log-in">Add to
+                                    wishlist
+                                </button>
+                                <button type="button" type="submit" value="userCart" class="btn col-4 log-in">Add to
+                                    cart
+                                </button>
+                            </p>
                         {% endif %}
                     </div>
                     <!--Image-->
@@ -93,6 +100,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
             crossorigin="anonymous"></script>
-    </div>
-        </body>
-    </html>
+</div>
+</body>
+</html>
