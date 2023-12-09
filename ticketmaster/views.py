@@ -116,7 +116,7 @@ def index(request):
                 # Append the user details dictionary to the user_list
                 event_list.append(event_details)
                 # store tickets into database for requirement 3 lol
-                Ticket.objects.create(Name=event_name, quantity=1, price=event_price)
+                Ticket.objects.create(name=event_name, quantity=1, price=event_price)
 
         # Create a context dictionary with the user_list and render the 'index.html' template
         context = {'events': event_list}
@@ -195,6 +195,11 @@ def cart_add(request, ticket, amount):
 
     # TO ADD TO CART
     # we add the ticket ie add_cart_to_user = Ticket()
+
+    # we might have to give an id for each ticket on html to retreive it's data
+
+    # If user presses add to cart then
+    cart = ticket.objects.create(User,name,quantity,price,address,time,images)
 
     return render(request, 'cart.html')
 

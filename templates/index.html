@@ -72,9 +72,12 @@
                         <h2 class="lead">Location: local <br> Address: {{ event.Address }} </h2>
                         <h2 class="lead">When: {{ event.Date }} @ {{ event.Time }} </h2>
                         <h2 class="lead">Buy here: <a href="{{ event.event_ticket_link }}">Tickets</a></h2>
+                        {% if user.is_authenticated %}
                         <p class="lead">
                             <button type="button" type="submit" value = "wishlist" class="btn col-4 log-in">Add to wishlist</button>
+                            <button type="button" type="submit" value = "userCart" class="btn col-4 log-in">Add to cart</button>
                         </p>
+                        {% endif %}
                     </div>
                     <!--Image-->
                     <div class="col-xl-6">
