@@ -299,6 +299,10 @@ def logout_view(request):
 
 
 def update_cart(request):
+    # We will have a button generated next to each ticket in users cart
+    # Where we say Update and the other is delete
+    # for update we can change quantity of ticket
+    # for delete we can remove this ticket
     return None
 
 
