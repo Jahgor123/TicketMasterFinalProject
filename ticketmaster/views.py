@@ -28,6 +28,8 @@ def view_results(request):
 def index(request):
     # Initialize searchEvent with a default value
     # searchEvent = 'default_event_type'
+    clear_all_tickets = Ticket.objects.all().delete()
+
 
     # if the request method is a post
     if request.method == 'POST':
