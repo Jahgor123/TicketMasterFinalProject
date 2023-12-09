@@ -229,10 +229,9 @@ def cart_add(request):
                                      image=image)
 
         # Redirect or render the appropriate response
-        return redirect('cart.html')  # or any other response you want
+        return redirect('cart_view')  # or any other response you want
 
     return redirect('index')
-
 
 
 def cart_pull(request):
@@ -305,3 +304,7 @@ def update_cart(request):
 
 def delete_cart(request):
     return None
+
+
+def cart_view(request):
+    return render(request, 'cart.html')
