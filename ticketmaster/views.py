@@ -28,8 +28,7 @@ def view_results(request):
 def index(request):
     # Initialize searchEvent with a default value
     # searchEvent = 'default_event_type'
-    clear_all_tickets = Ticket.objects.all().delete()
-
+    # clear_all_tickets = Ticket.objects.all().delete()
 
     # if the request method is a post
     if request.method == 'POST':
@@ -119,23 +118,23 @@ def index(request):
                 # Append the user details dictionary to the user_list
                 event_list.append(event_details)
                 # store tickets into database for requirement 3 lol
-                Ticket.objects.create(name=event_name, quantity=1, price=event_price)
+                # Ticket.objects.create(name=event_name, quantity=1, price=event_price)
+
+                # Check if the request method is POST and if the user is authenticated
+                if request.method == 'POST' and request.user.is_authenticated:
+                    # Get the values from the form
+                    # event_name = request.POST.get('event_name')
+                    quantity = int(request.POST.get('quantity', 1))
+                    # price = float(request.POST.get('price', 0.0))
+                    # address = request.POST.get('address', '')
+                    # time = request.POST.get('time', '')
+                    # image = request.POST.get('image', '')
+
+                    # Add the item to the cart
+                    cart_add(request, request.user, event_name, quantity, event_price, venue_address, event_formal_start_time, image)
 
         # Create a context dictionary with the user_list and render the 'index.html' template
         context = {'events': event_list}
-
-        # Check if the request method is POST and if the user is authenticated
-        if request.method == 'POST' and request.user.is_authenticated:
-            # Get the values from the form
-            event_name = request.POST.get('event_name')
-            quantity = int(request.POST.get('quantity', 1))
-            price = float(request.POST.get('price', 0.0))
-            address = request.POST.get('address', '')
-            time = request.POST.get('time', '')
-            image = request.POST.get('image', '')
-
-            # Add the item to the cart
-            cart_add(request, request.user, event_name, quantity, price, address, time, image)
 
         return render(request, 'index.html', context)
 
@@ -200,7 +199,7 @@ def add_wish_list(request, context):
     return render(request, 'logInPage.html')
 
 
-def cart_add(request, User, name, quantity, price, address, time, images):
+def cart_add(request, user, name, quantity, price, address, time, image):
     # Add to cart
     # user presses add to cart (needs quantity)
     # asks for the quantity (drop down limit 10 tickets or text field)
@@ -215,7 +214,8 @@ def cart_add(request, User, name, quantity, price, address, time, images):
     # we might have to give an id for each ticket on html to retreive it's data
 
     # If user presses add to cart then
-    cart = Ticket.objects.create(User, name, quantity, price, address, time, images)
+    cart = Ticket.objects.create(user=user, name=name, quantity=quantity, price=price, address=address, time=time,
+                                 image=image)
 
     return render(request, 'cart.html')
 

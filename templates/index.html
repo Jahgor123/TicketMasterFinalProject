@@ -68,12 +68,18 @@
                 <div class="row">
                     <!--Text & Button-->
                     <div class="col-xl-6">
-                        <h2 class="display-2"> {{ event.eventName }} </h2>
+                        <h2 class="display-2" id=""> {{ event.eventName }} </h2>
                         <h2 class="lead">Location: local <br> Address: {{ event.Address }} </h2>
                         <h2 class="lead">When: {{ event.Date }} @ {{ event.Time }} </h2>
                         <h2 class="lead">Buy here: <a href="{{ event.event_ticket_link }}">Tickets</a></h2>
                         {% if user.is_authenticated %}
                         <p class="lead">
+                            <input type="hidden" name="event_name" value="{{ event.eventName }}">
+    <input type="hidden" name="quantity" value="1">
+    <input type="hidden" name="price" value="{{ event.price }}">
+    <input type="hidden" name="address" value="{{ event.Address }}">
+    <input type="hidden" name="time" value="{{ event.Time }}">
+    <input type="hidden" name="image" value="{{ event.image }}">
                             <button type="button" type="submit" value = "wishlist" class="btn col-4 log-in">Add to wishlist</button>
                             <button type="button" type="submit" value = "userCart" class="btn col-4 log-in">Add to cart</button>
                         </p>

@@ -22,16 +22,14 @@ class Ticket(models.Model):
     # this is useful because if user is authenticated and we create a ticket
     # then
 
-
     def __str__(self):
         return self.name + '---' + self.address  # this.name returns name of this instance
 
-
-class UsersCart(models.Model):
-    # one ticket can be on many wishlist
-    # and one wishlist can be ma
-    ticket = models.ManyToManyField(Ticket)
-    # user can wishlist multiple tickets
-    # every ticket can be wishlist by multiple users
-    # ie : Jah -> 15 tickets and
-    # ticket#1 <- jah's wishlist , <- ollie's wishlist ,
+# class UsersCart(models.Model):
+#     # one ticket can be on many wishlist
+#     # and one wishlist can be ma
+#     ticket = models.ManyToManyField(Ticket)
+#     # user can wishlist multiple tickets
+#     # every ticket can be wishlist by multiple users
+#     # ie : Jah -> 15 tickets and
+#     # ticket#1 <- jah's wishlist , <- ollie's wishlist ,
