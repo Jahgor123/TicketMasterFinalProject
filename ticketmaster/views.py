@@ -307,4 +307,11 @@ def delete_cart(request):
 
 
 def cart_view(request):
-    return render(request, 'cart.html')
+    # Fetch all tickets for the current user
+    tickets = Ticket.objects.filter(user=request.user)
+
+    # Pass the tickets count to the template
+    context = {'tickets_count': tickets.count()}
+
+    # Render the 'cart.html' template with the tickets count
+    return render(request, 'cart.html', context)
