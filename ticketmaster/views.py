@@ -201,7 +201,7 @@ def add_wish_list(request, context):
 
 
 @login_required(login_url='login')
-def cart_add(request, user, name, quantity, price, address, time, image):
+def cart_add(request):
     # Add to cart
     # user presses add to cart (needs quantity)
     # asks for the quantity (drop down limit 10 tickets or text field)
@@ -217,7 +217,7 @@ def cart_add(request, user, name, quantity, price, address, time, image):
 
     if request.method == 'POST':
         user = request.user
-        event_name = request.POST.get('event_name')
+        name = request.POST.get('event_name')
         quantity = int(request.POST.get('quantity', 1))
         price = float(request.POST.get('price', 0.0))
         address = request.POST.get('address', '')
