@@ -229,7 +229,7 @@ def cart_add(request):
                                      image=image)
 
         # Redirect or render the appropriate response
-        return redirect('cart')  # or any other response you want
+        return redirect('cart.html')  # or any other response you want
 
     return redirect('index')
 
