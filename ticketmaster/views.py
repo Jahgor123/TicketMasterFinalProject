@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 # Make sure to install requests using 'pip install requests' on your terminal, otherwise 'requests' will not work
@@ -23,9 +24,11 @@ def view_results(request):
     return render(request, 'index.html')
 
 
+@login_required(login_url='login')
 def index(request):
     # Initialize searchEvent with a default value
     # searchEvent = 'default_event_type'
+    # clear_all_tickets = Ticket.objects.all().delete()
 
     # if the request method is a post
     if request.method == 'POST':
@@ -115,7 +118,21 @@ def index(request):
                 # Append the user details dictionary to the user_list
                 event_list.append(event_details)
                 # store tickets into database for requirement 3 lol
-                Ticket.objects.create(Name=event_name, quantity=1, price=event_price)
+                # Ticket.objects.create(name=event_name, quantity=1, price=event_price)
+
+                # # Check if the request method is POST and if the user is authenticated
+                # if request.method == 'POST' and request.user.is_authenticated:
+                #     # Get the values from the form
+                #     # event_name = request.POST.get('event_name')
+                #     quantity = int(request.POST.get('quantity', 1))
+                #     # price = float(request.POST.get('price', 0.0))
+                #     # address = request.POST.get('address', '')
+                #     # time = request.POST.get('time', '')
+                #     # image = request.POST.get('image', '')
+                #
+                #     # Add the item to the cart
+                #     cart_add(request, request.user, event_name, quantity, event_price, venue_address,
+                #              event_formal_start_time, image)
 
         # Create a context dictionary with the user_list and render the 'index.html' template
         context = {'events': event_list}
@@ -178,17 +195,55 @@ def clear_tickets_from_database(request, ticket):
 
 def add_wish_list(request, context):
     event_list = []
+    # for something in something
+    #
     return render(request, 'logInPage.html')
 
 
-def cart(request):
+@login_required(login_url='login')
+def cart_add(request):
+    # Add to cart
+    # user presses add to cart (needs quantity)
+    # asks for the quantity (drop down limit 10 tickets or text field)
+    # data is saved to the structure
+    # user has a ticket cart field
+    # if authentic then cart icon appears (top right) and once pressed
+    # comes to this method which will take you to cart.html and load all your tickets
+
+    # TO ADD TO CART
+    # we add the ticket ie add_cart_to_user = Ticket()
+
+    # we might have to give an id for each ticket on html to retreive it's data
+
+    if request.method == 'POST':
+        user = request.user
+        name = request.POST.get('event_name')
+        quantity = int(request.POST.get('quantity', 1))
+        price = float(request.POST.get('price', 0.0))
+        address = request.POST.get('address', '')
+        time = request.POST.get('time', '')
+        image = request.POST.get('image', '')
+
+        # If user presses add to cart then
+        cart = Ticket.objects.create(user=user, name=name, quantity=quantity, price=price, address=address, time=time,
+                                     image=image)
+
+        # Redirect or render the appropriate response
+        return redirect('cart_view')  # or any other response you want
+
+    return redirect('index')
+
+
+def cart_pull(request):
+    # open cart / view
+    # user presses add to cart (needs quantity)
+    # asks for the quantity (drop down limit 10 tickets or text field)
+    # data is saved to the structure
+    # user has a ticket cart field
+    # if authentic then cart icon appears (top right) and once pressed
+    # comes to this method which will take you to cart.html and load all your tickets
+
     return render(request, 'cart.html')
-
-
-# def create_user(username, password, email, first_name, last_name):
-#     # creates user object that will be saved to auth_user database
-#     user = User.objects.create_user(username, None, password)
-#     user.save()
 
 
 def register_view(request):
@@ -205,7 +260,8 @@ def register_view(request):
     else:
         # Create an empty instance of Django's UserCreationForm to generate the necessary html on the template.
         form = UserCreationForm()
-    return render(request, 'accounts/register.html', {'form': form})
+    # return render(request, 'accounts/register.html', {'form': form})
+    return render(request, 'register.html', {'form': form})
 
 
 def login_view(request):
@@ -235,3 +291,27 @@ def logout_view(request):
     # Redirect to index with user logged out
     return redirect('index')
 
+    # # to restrict user from reaching this page if not login
+    # @login_required(login_url='login')
+    # def my_view(request):
+    #     Tickets = Ticket.objects.filter(user=request.user)
+    #     context = {'tickets':'tickets'}
+
+
+def update_cart(request):
+    return None
+
+
+def delete_cart(request):
+    return None
+
+
+def cart_view(request):
+    # Fetch all tickets for the current user
+    tickets = Ticket.objects.filter(user=request.user)
+
+    # Pass the tickets and username to the template
+    context = {'tickets': tickets, 'username': request.user.username}
+
+    # Render the 'cart.html' template with the tickets count
+    return render(request, 'cart.html', context)
