@@ -24,10 +24,12 @@
                 <img src="{% static 'images/Login.png' %}" class="log-in-img">
 
 {#                display logout button on top right#}
-                <button type="button" class=" log-in" type="submit" value="logout">
+                <button class=" log-in" type="submit" value="logout">
                     <a href="{% url 'logout' %}">Log Out</a>
                 </button>
-
+                <button class="" type="submit" value="cart">
+                    <a href="{% url 'cart_add' %}">View Cart</a>
+                </button>
 
                 {% else %}
                 <button type="button" class="btn col-4 log-in">
