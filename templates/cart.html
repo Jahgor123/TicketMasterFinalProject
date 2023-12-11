@@ -23,13 +23,14 @@
 
             {#            <img src="{% static 'images/Login.png' %}" id="logo" alt="logoImg" class="log-in-img" type="submit" name="login"> Login In#}
             <p class="float-right" > Welcome, {{ username }}
-{#                <img src="{% static 'images/cat.png' %}" >#}
+                <img src="{% static 'images/Login.png' %}" >
 
 {#                display logout button on top right#}
                 <button type="button" class=" log-in" type="submit" value="logout">
                     <a href="{% url 'logout' %}">Log Out</a>
                 </button>
             <h1>Your Cart: {{ tickets|length }}</h1>
+            <img src="{% static 'images/cart.png' %}" >
             <hr>
             <div>
                 <h2>Your items:</h2>
