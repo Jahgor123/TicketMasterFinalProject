@@ -20,11 +20,13 @@
         <div class="container" >
 
             {#            <img src="{% static 'images/Login.png' %}" id="logo" alt="logoImg" class="log-in-img" type="submit" name="login"> Login In#}
-            <p class="float-right" > Welcome, {{ username }}
-                <img src="{% static 'images/cat.png' %}" >
+            <div class="welcome">
+            <h1> Welcome, {{ username }} </h1>
+            </div>
+                <img src="{% static 'images/Login.png' %}" class="log-in-img" alt="login">
 
 {#                display logout button on top right#}
-                <button type="button" class=" log-in" type="submit" value="logout">
+                <button class=" log-in" type="submit" value="logout">
                     <a href="{% url 'logout' %}">Log Out</a>
                 </button>
 

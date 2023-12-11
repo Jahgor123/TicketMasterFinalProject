@@ -92,6 +92,26 @@ body {
     border-radius: 7%;
 }
 
+#log-out {
+    background: #27476E;
+    color: white;
+    padding: 0;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-top: 10%;
+    border: 1px solid #EAF8BF;
+    border-radius: 7%;
+}
+
+
+.welcome {
+    background: #27476E;
+    color: red;
+    padding: 0;
+    border: 1px solid #EAF8BF;
+}
+
 #username {
     width: 75%;
     padding: 12px 20px;
