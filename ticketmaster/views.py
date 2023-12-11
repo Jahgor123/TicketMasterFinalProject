@@ -135,12 +135,13 @@ def index(request):
                 #              event_formal_start_time, image)
 
         # Create a context dictionary with the user_list and render the 'index.html' template
-        context = {'events': event_list}
+        context = {'events': event_list, 'username': request.user.username}
 
         return render(request, 'index.html', context)
 
         # all other cases, just render the page without sending/passing any context to the template
-
+        # if user is logged in the display username.
+        context = {'username': request.user.username}
     return render(request, 'index.html')
 
 
