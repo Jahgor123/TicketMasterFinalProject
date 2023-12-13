@@ -43,7 +43,7 @@ body {
     border-radius: 10%;
 }
 
-#logo {
+.logo {
     width: 50%;
     display: block;
     margin-left: auto;
