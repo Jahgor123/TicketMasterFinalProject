@@ -43,7 +43,7 @@ body {
     border-radius: 10%;
 }
 
-#logo {
+.logo {
     width: 50%;
     display: block;
     margin-left: auto;
@@ -72,6 +72,12 @@ body {
     text-align: center;
 }
 
+.welcome{
+    background: #27476E;
+    border: #c98d04;
+    border-radius: 10px;
+}
+
 #searchbar {
 
 }
@@ -82,7 +88,6 @@ body {
 }
 
 .log-in {
-    background: #27476E;
     color: white;
     padding: 0;
     margin-left: auto;
@@ -153,7 +158,7 @@ body {
     font-size: 2rem;
 }
 
-#log-in-txt {
+.log-in-txt {
     color: white;
 }
 

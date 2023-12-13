@@ -135,13 +135,12 @@ def index(request):
                 #              event_formal_start_time, image)
 
         # Create a context dictionary with the user_list and render the 'index.html' template
-        context = {'events': event_list, 'username': request.user.username}
+        context = {'events': event_list}
 
         return render(request, 'index.html', context)
 
         # all other cases, just render the page without sending/passing any context to the template
-        # if user is logged in the display username.
-        context = {'username': request.user.username}
+
     return render(request, 'index.html')
 
 
@@ -200,10 +199,9 @@ def add_wish_list(request, context):
     #
     return render(request, 'logInPage.html')
 
-
 @login_required(login_url='login')
 def cart_add(request):
-    # Add to cart
+    # Add to cart && view
     # user presses add to cart (needs quantity)
     # asks for the quantity (drop down limit 10 tickets or text field)
     # data is saved to the structure
@@ -224,14 +222,11 @@ def cart_add(request):
         address = request.POST.get('address', '')
         time = request.POST.get('time', '')
         image = request.POST.get('image', '')
-
         # If user presses add to cart then
         cart = Ticket.objects.create(user=user, name=name, quantity=quantity, price=price, address=address, time=time,
-                                     image=image)
-
-        # Redirect or render the appropriate response
+                                         image=image)
         return redirect('cart_view')  # or any other response you want
-
+        # Redirect or render the appropriate response
     return redirect('index')
 
 
@@ -299,15 +294,28 @@ def logout_view(request):
     #     context = {'tickets':'tickets'}
 
 
-def update_cart(request):
-    # We will have a button generated next to each ticket in users cart
-    # Where we say Update and the other is delete
-    # for update we can change quantity of ticket
-    # for delete we can remove this ticket
+@login_required(login_url='login')
+def update_cart(request, value):
+    # add one more ticket to the cart
+    if request.method == 'POST':
+        if request.POST.get('add-button'):
+            if value == 'increase':
+                Ticket.quantity += 1
+            if value == 'decrease':
+                Ticket.quantity -= 1
+                if Ticket.quantity == 0:
+                    # remove from cart
+                    Ticket.delete()
+            if value != 'increase':
+                if value != 'decrease':
+                    print("Well that did not go as exspected!")
     return None
 
 
 def delete_cart(request):
+    if request.method == 'POST':
+        if request.POST.get('delete-button'):
+            Ticket.delete()
     return None
 
 
