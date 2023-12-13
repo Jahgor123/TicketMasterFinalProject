@@ -199,10 +199,9 @@ def add_wish_list(request, context):
     #
     return render(request, 'logInPage.html')
 
-
 @login_required(login_url='login')
 def cart_add(request):
-    # Add to cart
+    # Add to cart && view
     # user presses add to cart (needs quantity)
     # asks for the quantity (drop down limit 10 tickets or text field)
     # data is saved to the structure
@@ -223,14 +222,11 @@ def cart_add(request):
         address = request.POST.get('address', '')
         time = request.POST.get('time', '')
         image = request.POST.get('image', '')
-
         # If user presses add to cart then
         cart = Ticket.objects.create(user=user, name=name, quantity=quantity, price=price, address=address, time=time,
-                                     image=image)
-
-        # Redirect or render the appropriate response
+                                         image=image)
         return redirect('cart_view')  # or any other response you want
-
+        # Redirect or render the appropriate response
     return redirect('index')
 
 
@@ -298,11 +294,28 @@ def logout_view(request):
     #     context = {'tickets':'tickets'}
 
 
-def update_cart(request):
+@login_required(login_url='login')
+def update_cart(request, value):
+    # add one more ticket to the cart
+    if request.method == 'POST':
+        if request.POST.get('add-button'):
+            if value == 'increase':
+                Ticket.quantity += 1
+            if value == 'decrease':
+                Ticket.quantity -= 1
+                if Ticket.quantity == 0:
+                    # remove from cart
+                    Ticket.delete()
+            if value != 'increase':
+                if value != 'decrease':
+                    print("Well that did not go as exspected!")
     return None
 
 
 def delete_cart(request):
+    if request.method == 'POST':
+        if request.POST.get('delete-button'):
+            Ticket.delete()
     return None
 
 
