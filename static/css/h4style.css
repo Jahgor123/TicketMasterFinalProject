@@ -107,7 +107,8 @@ body {
 
 .welcome {
     background: #27476E;
-    color: red;
+    color: white;
+    text-align: center;
     padding: 0;
     border: 1px solid #EAF8BF;
 }
@@ -144,9 +145,10 @@ body {
 
 }
 
-#log-in-button {
+.log-in-button {
     background: #27476E;
     display: block;
+    color: white;
     padding: 1%;
     margin: 2% auto;
     width: 50%;

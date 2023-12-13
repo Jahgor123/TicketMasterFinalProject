@@ -21,13 +21,13 @@
 
             {#            <img src="{% static 'images/Login.png' %}" id="logo" alt="logoImg" class="log-in-img" type="submit" name="login"> Login In#}
             <div class="welcome">
-            <h1> Welcome, {{ username }} </h1>
+            <h1> Welcome! {{ username }} </h1>
             </div>
                 <img src="{% static 'images/Login.png' %}" class="log-in-img" alt="login">
 
 {#                display logout button on top right#}
-                <button class=" log-in" type="submit" value="logout">
-                    <a href="{% url 'logout' %}">Log Out</a>
+                <button class="log-in-button" type="submit" value="logout">
+                    <a href="{% url 'logout' %}" id="log-in-txt">Log Out</a>
                 </button>
 
 
@@ -57,9 +57,9 @@
 
             <!--https://www.educba.com/html-search-bar/-->
             {% csrf_token %}
-            <input type="text" name="term" placeholder="Search for event"  class="col-4">
-            <input type="text" name="city" placeholder="Search in state"  class="col-4">
-            <input class="btn btn-primary" type="submit" value="GO" class="col-4">
+            <input type="text" name="term" placeholder="Search for event"  class="col-6">
+            <input type="text" name="city" placeholder="Search in state"  class="col-6">
+            <input class=" col-4 log-in-button"  type="submit" value="GO">
 
         </div>
     </form>
@@ -71,9 +71,9 @@
                     <!--Text & Button-->
                     <div class="col-xl-6">
                         <h2 class="display-2" id=""> {{ event.eventName }} </h2>
-                        <h2 class="lead">Location: local <br> Address: {{ event.Address }} </h2>
+                        <h2 class="lead">Address: {{ event.Address }} </h2>
                         <h2 class="lead">When: {{ event.Date }} @ {{ event.Time }} </h2>
-                        <h2 class="lead">Buy here: <a href="{{ event.event_ticket_link }}">Tickets</a></h2>
+                        <!--<h2 class="lead">Buy here: <a href="{{ event.event_ticket_link }}">Tickets</a></h2>-->
                         {% if user.is_authenticated %}
                              <form method="post" action="{% url 'cart_add' %}">
                             {% csrf_token %}
@@ -85,7 +85,7 @@
                                 <input type="hidden" name="time" value="{{ event.Time }}">
                                 <input type="hidden" name="image" value="{{ event.image }}">
                             <button type="submit" value="userCart" class="btn col-4 log-in">Add to cart</button>
-                            <button type="submit" value="wishlist" class="btn col-4 log-in">Add to wishlist</button>
+                            <!--<button type="submit" value="wishlist" class="btn col-4 log-in">Add to wishlist</button>-->
                         </p>
                              </form>
                         {% endif %}
