@@ -20,18 +20,19 @@
         <div class="container" >
 
             {#            <img src="{% static 'images/Login.png' %}" id="logo" alt="logoImg" class="log-in-img" type="submit" name="login"> Login In#}
-            <p class="padmar"> Welcome, {{ username }} </p>
-                <img src="{% static 'images/Login.png' %}" class="log-in-img">
+                <p class="welcome">Welcome! {{ username }}</p>
+                <img src="{% static 'images/Login.png' %}" class="log-in-img" alt="login">
 
 {#                display logout button on top right#}
-                <button class=" log-in" type="submit" value="logout">
+            <div class="padmar">
+                <button  class="btn-info" type="submit" value="logout">
                     <a href="{% url 'logout' %}">Log Out</a>
                 </button>
-                <button class="" type="submit" value="cart">
+                <button class="btn-info" type="submit" value="cart">
                     <a href="{% url 'cart_view' %}">View Cart</a>
                 </button>
-
-                {% else %}
+            </div>
+            {% else %}
                 <button type="button" class="btn col-4 log-in">
                     <a href="{% url 'login' %}">
                         <img src="{% static 'images/Login.png' %}" id="logo" alt="logoImg" class="log-in-img" type="submit" name="login"> Login In
