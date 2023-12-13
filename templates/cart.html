@@ -38,6 +38,12 @@
                 <!-- Loop through the tickets and display details -->
                 {% for ticket in tickets %}
                     <p>{{ ticket.name }} - {{ ticket.quantity }} - {{ ticket.price }}</p>
+                    <form action="#" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" value="userCart" class="btn col-2 log-in">Add Ticket</button>
+                        <button type="submit" value="decrease" class="btn col-2 log-in" name="add-button">Remove ticket</button>
+                        <button type="submit" value="erase" class="btn col-2 log-in" name="delete-button">Delete all tickets</button>
+                    </form>
                 {% endfor %}
             </div>
 
@@ -50,7 +56,7 @@
             </button>
 
         </div>
-</div>
+        </div>
     {% endif %}
 
 
