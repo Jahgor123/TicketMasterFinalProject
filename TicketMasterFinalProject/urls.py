@@ -15,14 +15,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from ticketmaster import views
 from ticketmaster import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-<<<<<<< HEAD
-    path('', views.view_home),
-=======
     path('', views.index, name='index'),
     path('accounts/', include("django.contrib.auth.urls")),
     # path('register', include("django.contrib.auth.urls"), name='register'),
@@ -31,7 +29,8 @@ urlpatterns = [
     path('logout', views.logout_view, name='logout'),
     path('cart_add', views.cart_add, name='cart_add'),
     path('cart.html', views.cart_view, name='cart_view'),
-    path('update_cart/<str:id>', views.update_cart, name='update_cart'),
+    # path('update_cart', views.update_cart, name='update_cart'),
     path('delete_cart/<str:id>', views.delete_cart, name='delete_cart'),
->>>>>>> parent of 26885d5 (CODE NOW WORKS REFACTORED ADD AND UPDATE)
+    path('update_cart/<str:id>', views.update_cart, name='update_cart'),
+
 ]
