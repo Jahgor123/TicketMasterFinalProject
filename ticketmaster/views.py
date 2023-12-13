@@ -201,7 +201,6 @@ def add_wish_list(request, context):
 
 @login_required(login_url='login')
 def cart_add(request):
-    name = '123'
     # Add to cart && view
     # user presses add to cart (needs quantity)
     # asks for the quantity (drop down limit 10 tickets or text field)
@@ -216,34 +215,18 @@ def cart_add(request):
     # we might have to give an id for each ticket on html to retreive it's data
 
     if request.method == 'POST':
-        if name == request.POST.get('event_name'):
-            user = request.user
-            name = request.POST.get('event_name')
-            quantity = int(request.POST.get('quantity', 1))
-            price = float(request.POST.get('price', 0.0))
-            address = request.POST.get('address', '')
-            time = request.POST.get('time', '')
-            image = request.POST.get('image', '')
-
-            # If user presses add to cart then
-            cart = Ticket.objects.create(user=user, name=name, quantity=quantity, price=price, address=address, time=time,
+        user = request.user
+        name = request.POST.get('event_name')
+        quantity = int(request.POST.get('quantity', 1))
+        price = float(request.POST.get('price', 0.0))
+        address = request.POST.get('address', '')
+        time = request.POST.get('time', '')
+        image = request.POST.get('image', '')
+        # If user presses add to cart then
+        cart = Ticket.objects.create(user=user, name=name, quantity=quantity, price=price, address=address, time=time,
                                          image=image)
-            return redirect('cart_view')  # or any other response you want
-        else:
-            oldname = Ticket.name
-            olduser = Ticket.user
-            oldquantity = Ticket.quantity
-            oldaddress = Ticket.address
-            oldtime = Ticket.time
-            oldprice = Ticket.price
-            oldimage = Ticket.image
-            # If user presses add to cart then
-            cart = Ticket.objects.create(user=olduser, name=oldname, quantity=oldquantity, price=oldprice, address=oldaddress, time=oldtime,
-                                         image=oldimage)
-            return redirect('cart_view')  # or any other response you want
-
+        return redirect('cart_view')  # or any other response you want
         # Redirect or render the appropriate response
-
     return redirect('index')
 
 
