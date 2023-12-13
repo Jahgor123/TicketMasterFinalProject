@@ -31,14 +31,19 @@
                 <!-- Loop through the tickets and display details -->
                 {% for ticket in tickets %}
                     <p>{{ ticket.name }} - {{ ticket.quantity }} - {{ ticket.price }}</p>
-                    <form action="#" method="POST">
-                        {% csrf_token %}
+{#                    <form action="{% url 'delete_cart' %}" method="POST">#}
+{#                        {% csrf_token %}#}
+                    <form action="{% url 'update_cart' ticket.id  %}" method="POST">
+                    {% csrf_token %}
                         <button type="submit" value="userCart" class="btn col-2 log-in">Add Ticket</button>
-                        <button type="submit" value="decrease" class="btn col-2 log-in" name="add-button">Remove
-                            ticket
-                        </button>
-                        <button type="submit" value="erase" class="btn col-2 log-in" name="delete-button">Delete all
-                            tickets
+                    </form>
+{#                        <button type="submit" value="decrease" class="btn col-2 log-in" name="add-button">Remove#}
+{#                            ticket#}
+{#                        </button>#}
+{#                        <a href="{% url 'delete_cart' ticket.id %}" > Delete</a>#}
+                    <form action="{% url 'delete_cart' ticket.id  %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" value="erase" class="btn col-2 log-in" name="delete-button">Delete ticket
                         </button>
                     </form>
                 {% endfor %}

@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 # Make sure to install requests using 'pip install requests' on your terminal, otherwise 'requests' will not work
 import requests
 from datetime import datetime
@@ -199,6 +199,7 @@ def add_wish_list(request, context):
     #
     return render(request, 'logInPage.html')
 
+
 @login_required(login_url='login')
 def cart_add(request):
     # Add to cart && view
@@ -223,8 +224,9 @@ def cart_add(request):
         time = request.POST.get('time', '')
         image = request.POST.get('image', '')
         # If user presses add to cart then
-        cart = Ticket.objects.create(user=user, name=name, quantity=quantity, price=price, address=address, time=time,
-                                         image=image)
+        cart = Ticket.objects.create(user=user, name=name, quantity=quantity, price=price, address=address,
+                                     time=time,
+                                     image=image)
         return redirect('cart_view')  # or any other response you want
         # Redirect or render the appropriate response
     return redirect('index')
@@ -294,29 +296,47 @@ def logout_view(request):
     #     context = {'tickets':'tickets'}
 
 
+# @login_required(login_url='login')
+# def update_cart(request, value):
+#     # add one more ticket to the cart
+#     if request.method == 'POST':
+#         if request.POST.get('add-button'):
+#             if value == 'increase':
+#                 Ticket.quantity += 1
+#             if value == 'decrease':
+#                 Ticket.quantity -= 1
+#                 if Ticket.quantity == 0:
+#                     # remove from cart
+#                     Ticket.delete()
+#             if value != 'increase':
+#                 if value != 'decrease':
+#                     print("Well that did not go as exspected!")
+#     return None
+
 @login_required(login_url='login')
-def update_cart(request, value):
-    # add one more ticket to the cart
-    if request.method == 'POST':
-        if request.POST.get('add-button'):
-            if value == 'increase':
-                Ticket.quantity += 1
-            if value == 'decrease':
-                Ticket.quantity -= 1
-                if Ticket.quantity == 0:
-                    # remove from cart
-                    Ticket.delete()
-            if value != 'increase':
-                if value != 'decrease':
-                    print("Well that did not go as exspected!")
-    return None
+def update_cart(request, id):
+    # get all tickets for the current user with the requested id
+    ticket = get_object_or_404(Ticket, user=request.user, id=id)
+    ticket.quantity += 1
+    ticket.save()
+
+    return redirect('cart.html')
 
 
-def delete_cart(request):
-    if request.method == 'POST':
-        if request.POST.get('delete-button'):
-            Ticket.delete()
-    return None
+@login_required(login_url='login')
+def delete_cart(request, id):
+    # get all tickets for the current user with the requested id
+    tickets = Ticket.objects.filter(user=request.user, id=id)
+    tickets.delete()
+
+    return redirect('cart.html')
+
+
+# def delete_cart(request):
+#     if request.method == 'POST':
+#         if request.POST.get('delete-button'):
+#             Ticket.delete()
+#     return None
 
 
 def cart_view(request):
