@@ -224,8 +224,7 @@ def cart_add(request):
         time = request.POST.get('time', '')
         image = request.POST.get('image', '')
         # If user presses add to cart then
-        cart = Ticket.objects.create(user=user, name=name, quantity=quantity, price=price, address=address,
-                                     time=time,
+        cart = Ticket.objects.create(user=user, name=name, quantity=quantity, price=price, address=address, time=time,
                                      image=image)
         return redirect('cart_view')  # or any other response you want
         # Redirect or render the appropriate response
@@ -297,46 +296,52 @@ def logout_view(request):
 
 
 # @login_required(login_url='login')
-# def update_cart(request, value):
-#     # add one more ticket to the cart
-#     if request.method == 'POST':
-#         if request.POST.get('add-button'):
-#             if value == 'increase':
-#                 Ticket.quantity += 1
-#             if value == 'decrease':
-#                 Ticket.quantity -= 1
-#                 if Ticket.quantity == 0:
-#                     # remove from cart
-#                     Ticket.delete()
-#             if value != 'increase':
-#                 if value != 'decrease':
-#                     print("Well that did not go as exspected!")
-#     return None
+# def update_cart(request, id):
+#     # get all tickets for the current user with the requested id
+#     ticket = get_object_or_404(Ticket, user=request.user, id=id)
+#     ticket.quantity += 1
+#     ticket.save()
+#
+#     return redirect('cart.html')
+#
+#
+# @login_required(login_url='login')
+# def delete_cart(request, id):
+#     # get all tickets for the current user with the requested id
+#     tickets = Ticket.objects.filter(user=request.user, id=id)
+#     tickets.delete()
+#
+#     return redirect('cart.html')
 
 @login_required(login_url='login')
 def update_cart(request, id):
-    # get all tickets for the current user with the requested id
+    # get the ticket for the current user with the requested id
     ticket = get_object_or_404(Ticket, user=request.user, id=id)
     ticket.quantity += 1
     ticket.save()
 
-    return redirect('cart.html')
+    # Fetch the updated list of tickets
+    tickets = Ticket.objects.filter(user=request.user)
+
+    # Pass the updated list of tickets to the template
+    context = {'tickets': tickets}
+
+    return render(request, 'cart.html', context)
 
 
 @login_required(login_url='login')
 def delete_cart(request, id):
-    # get all tickets for the current user with the requested id
-    tickets = Ticket.objects.filter(user=request.user, id=id)
-    tickets.delete()
+    # get the ticket for the current user with the requested id and delete it
+    ticket = get_object_or_404(Ticket, user=request.user, id=id)
+    ticket.delete()
 
-    return redirect('cart.html')
+    # Fetch the updated list of tickets
+    tickets = Ticket.objects.filter(user=request.user)
 
+    # Pass the updated list of tickets to the template
+    context = {'tickets': tickets}
 
-# def delete_cart(request):
-#     if request.method == 'POST':
-#         if request.POST.get('delete-button'):
-#             Ticket.delete()
-#     return None
+    return render(request, 'cart.html', context)
 
 
 def cart_view(request):
